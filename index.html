@@ -51,31 +51,260 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    
+    .accordion{
+      transform:
+        perspective(75em)
+        rotateX(12deg);
+      box-shadow:
+        rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
+        rgba(19, 26, 32, 0.08) 0px 35px 75px -35px;
+      border-radius: 10px;
+      border: 1px solid;
+      border-color:
+        rgb(213, 220, 226)
+        rgb(213, 220, 226)
+        rgb(184, 194, 204);
+      transition:
+        .4s ease-in-out transform,
+        .4s ease-in-out box-shadow;
+    }
+    
+    .accordion:hover{
+      transform: rotateX(0deg);
+      transition:
+        .4s ease-in-out transform,
+        .4s ease-in-out box-shadow;
+    }
+
+    .accordion-button{
+      background-color: transparent;
+      font-size: 1.5rem;
+    }
+
+    .member{
+      transform-style: preserve-3d;
+      border-radius: 32px;
+      box-shadow:
+        1px 1px 0 1px #f9f9fb,
+        -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+        28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+      transition:
+        .5s ease-in-out transform,
+        .5s ease-in-out box-shadow;
+    }
+
+    .member:hover{
+      background-color: #184f99;
+      color: white;
+      transform:
+        translate3d(0px, -16px, 0px)
+        rotateZ(-4deg);
+      box-shadow:
+        1px 1px 0 1px #f9f9fb,
+        -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+        54px 54px 28px -10px rgba(34, 33, 81, 0.15);
+        transition:
+        .5s,
+        .5s ease-in-out transform,
+        .5s ease-in-out box-shadow;
+    }
+
+    #sachnol-logo{
+      right: 0;
+    }
+
+    #mobile-nav{
+      right: 0;
+    }
+
+    :root {
+          --caard-height: 40vw;
+          --caard-margin: 4vw;
+          --caard-top-offset: 1em;
+          --outline-width: 0px;
+      }
+
+      #caards {
+          /* Make place at bottom, as items will slide to that position*/
+          padding-bottom: calc(var(--numcaards) * var(--caard-top-offset));
+          /* Don't include the --caard-margin in padding, as that will affect the scroll-timeline*/
+          margin-bottom: var(--caard-margin);
+      }
+
+      #caard_1 {
+          --index: 1;
+      }
+
+      #caard_2 {
+          --index: 2;
+      }
+
+      #caard_3 {
+          --index: 3;
+      }
+
+      #caard_4 {
+          --index: 4;
+      }
+
+      .caard {
+          position: sticky;
+          top: 0;
+          padding-top: calc(var(--index) * var(--caard-top-offset));
+      }
+
+      .caard__content {
+          transform-origin: 50% 0%;
+          will-change: transform;
+      }
+
+      #caards {
+          list-style: none;
+          outline: calc(var(--outline-width) * 10) solid hotpink;
+
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(var(--numcaards), var(--caard-height));
+          gap: var(--caard-margin);
+      }
+
+      .caard {
+          outline: var(--outline-width) solid lime;
+      }
+
+      .caard__content {
+          box-shadow: 0 0.2em 1em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.1);
+          background: rgb(255, 255, 255);
+          color: rgb(10, 5, 7);
+          border-radius: 1em;
+          overflow: hidden;
+
+          display: grid;
+          grid-template-areas: "text img";
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+
+          align-items: stretch;
+          outline: var(--outline-width) solid blue;
+      }
+
+      .caard__content > div {
+          grid-area: text;
+          width: 80%;
+          place-self: center;
+          text-align: left;
+
+          display: grid;
+          gap: 1em;
+          place-items: start;
+      }
+
+      .caard__content > figure {
+          grid-area: img;
+          overflow: hidden;
+      }
+
+      .caard__content > figure > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+
+		@supports (animation-timeline: view()) {
+			.caard {
+				--index0: calc(var(--index) - 1); /* 0-based index */
+				--reverse-index: calc(var(--numcaards) - var(--index0)); /* reverse index */
+				--reverse-index0: calc(var(--reverse-index) - 1); /* 0-based reverse index */
+			}
+
+			@keyframes scale {
+				to {
+					transform:
+						scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
+				}
+			}
+
+			#caards {
+				--numcaards: 4;
+				view-timeline-name: --caards-element-scrolls-in-body;
+			}
+
+			.caard__content {
+				--start-range: calc(var(--index0) / var(--numcaards) * 100%);
+				--end-range: calc((var(--index)) / var(--numcaards) * 100%);
+
+				animation: linear scale forwards;
+				animation-timeline: --caards-element-scrolls-in-body;
+				animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
+			}
+		}
+  </style>
 </head>
 
 <body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-      <!-- <h1 class="logo me-auto"><a href="index.html">Presento<span>.</span></a></h1> -->
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="index.html" class="logo me-auto"><img src="assets/img/0/logo/Logo.png" alt=""></a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-6 d-flex justify-content-center align-items-center">
+          <a href="index.html" class="logo"><img src="assets/img/0/logo/Logo.png" alt=""></a>
+        </div>
+        <div class="col-6 d-none d-md-block mt-3">
+          <nav id="navbar" class="navbar order-last order-lg-0" style="--mdb-navbar-box-shadow:0">
+            <ul>
+              <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+              <li><a class="nav-link scrollto" href="#counts">About</a></li>
+              <li><a class="nav-link scrollto " href="#about">Recycle</a></li>
+              <li><a class="nav-link scrollto" href="#tabs">Products</a></li>
+              <li><a class="nav-link scrollto" href="#portfolio">Gallery</a></li>
+              <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
 
-      <nav id="navbar" class="navbar order-last order-lg-0" style="--mdb-navbar-box-shadow:0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#counts">About</a></li>
-          <li><a class="nav-link scrollto " href="#about">Why Us</a></li>
-          <li><a class="nav-link scrollto" href="#tabs">Products</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Gallery</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+        <div class="col-6 d-flex flex-row-reverse d-block d-sm-none">
+          <!-- Button trigger modal -->
+          <button id="mob-nav" type="button" style="background: none; border: 0px;" class="px-2 py-1" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+            <i class="bi bi-list" style="font-size: xx-large; color: white"></i>
+          </button>
+        </div>
 
-      <a href="#contact" class="get-started-btn scrollto">Contact</a>
+        <div class="col-3 d-flex justify-content-center align-items-center d-none d-xxl-block">
+          <img id="sachnol-logo" src="assets/img/0/logo/sachnol-logo.png" style="width: auto; max-width: fit-content; height: 100px"/>
+        </div>
+
+      </div>
     </div>
-  </header><!-- End Header -->
+  </header>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img id="sachnol-logo" src="assets/img/0/logo/sachnol-logo.png" style="width: auto; max-width: fit-content; height: 100px"/>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul style="list-style-type: none; margin-left: 50px">
+            <li><a class="nav-link scrollto active" href="#hero"><h5 style='font-family: "Raleway", sans-serif;'>Home</h5></a></li>
+            <li><a class="nav-link scrollto" href="#counts"><h5 style='font-family: "Raleway", sans-serif;'>About</h5></a></li>
+            <li><a class="nav-link scrollto " href="#about"><h5 style='font-family: "Raleway", sans-serif;'>Recycle</h5></a></li>
+            <li><a class="nav-link scrollto" href="#tabs"><h5 style='font-family: "Raleway", sans-serif;'>Products</h5></a></li>
+            <li><a class="nav-link scrollto" href="#portfolio"><h5 style='font-family: "Raleway", sans-serif;'>Gallery</h5></a></li>
+            <li><a class="nav-link scrollto" href="#contact"><h5 style='font-family: "Raleway", sans-serif;'>Contact</h5></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
@@ -127,7 +356,8 @@
           <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-              <h5 class="mb-3 text-start" style="line-height: 1.5;">Vidyaa Petroleum is an oil manufacturing company based in India, dedicated to delivering top-tier lubricants and oils tailored specifically for machinery applications. With a commitment to excellence and a strong emphasis on quality, our company has established itself as a trusted partner for industries relying on efficient and reliable machinery operations.</h5>
+              <h5 class="mb-3 text-start" style="line-height: 1.5;">Vidya Petroleum (India) Private Limited has chosen the world's most advanced technology. With the combination of very high blending process of oil manufacturing & process of multiple grease, a well-equipped laboratory and using internationally recognize high quality additives, we can assure customers of top quality of products.
+                </h5>
             </div>
             <div class="col-lg-2"></div>
           </div>
@@ -168,96 +398,76 @@
           </div>
 
         </div>
-      </div>
     </section><!-- End Counts Section -->
+
+    <ul id="caards" style="margin-right: 50px" class="d-none d-sm-block" data-aos="fade-up">
+      <li class="caard" id="caard_1">
+          <div class="caard__content">
+              <div class="section-title mt-4">
+                  <h2>Our Vision</h2>
+                  <h5>Being contemporary in ideas and traditional in values, To evolve as a reliable, customer oriented organization, nurturing an open and warm environment where member is encouraged to share ideas and excel as an individual.</h5>
+              </div>
+              <figure class="mb-0">
+                  <img src="assets/img/0/utility/8.jpeg" alt="Image description">
+              </figure>
+          </div>
+      </li>
+      <li class="caard" id="caard_2">
+            <div class="caard__content">
+                <div class="section-title mt-4">
+                    <h2>Our Mission</h2>
+                    <h5>Our mission is to develop Manufacture, Market & Export quality lubricants that prove customized for our customer needs. We aim to be the leader in the automotive and industrial lubricant business globally. With an endeavor excellence, keeping R & D as the essence of organization, we will provide quality lubricants to our esteemed customers.</h5>
+                </div>
+                <figure class="mb-0">
+                    <img src="assets/img/0/utility/12.jpeg" height="" alt="Image description">
+                </figure>
+            </div>
+      </li>
+      <li class="caard" id="caard_4">
+            <div class="caard__content">
+                <div class="section-title mt-4">
+                    <h2>Service</h2>
+                    <h5>Service
+                      At Vidya Petroleum (India) Private Limited it is our aim to help you to create a competitive advantage for yourself & your customers. This means providing you with the best product for a specific application with exceptional service.                      
+                      <br><br><b>Exceptional service means :</b>
+                      <br>Getting the product delivered to you on time, in full and on specification. In the event of complaint, responding to it quickly and efficiently. Having technical service specialists who can advice you on your specific application needs.</h5>
+                </div>
+                <figure class="mb-0">
+                    <img src="assets/img/0/utility/5.jpeg" alt="Image description">
+                </figure>
+            </div>
+      </li>
+    </ul>
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="row no-gutters">
-          <div class="content col-xl-4 d-flex align-items-stretch">
+          <div class="content col-lg-6 d-flex align-items-stretch">
             <div class="content">
-              <h3>Why Choose Us</h3>
-              <p>We prioritize quality above all else. Our oils are formulated using advanced manufacturing processes and adhere to international standards, ensuring optimal performance and longevity of machinery.</p>
-              <a href="#" class="about-btn"><span>Contact Us</span> <i class="bx bx-chevron-right"></i></a>
+              <h3 style="text-transform:uppercase;">Recycle</h3>
+              <p style="text-align: left; margin: auto 10px">We undertake all the activities from design, procurement, construction, commissioning to handover of the complete re-refinery plant to our esteemed customers. Every re-refinery plant customer has custom requirement. 
+                <br><br>We implement the latest 3-D modeling tools to design every re-refinery plant. This enables us to complete the entire plant building procedure in the most accurate and timely manner. Our tested and proven Re-Refining plant process technology provides maximum yield from the used waste lube oil, Engine oil, lubricant (Black Oil) in an environmentally friendly manner. 
+                <br><br>The process plants that we build for you are pre-assembled, pre-insulated, pre-wired and ready for installation and commissioning.</p>
+              <a href="#" class="about-btn mt-4"><span>Contact Us</span> <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
-          <div class="col-xl-8 d-flex align-items-stretch">
+          <div class="col-lg-6 d-flex flex-row-reverse align-items-stretch">
             <!-- Carousel wrapper -->
             <div id="carouselExampleControls" class="carousel slide text-center" data-mdb-ride="carousel">
 
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="mb-4"
-                    src="./assets/img/0/flaticon/1.png" alt="avatar"
-                    style="width: 150px;" />
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                      <h5 class="mb-3">Quality-Centric Approach</h5>
-                      <p class="text-muted">Vidyaa Petroleum places quality as its foremost priority. This commitment sets the company apart from competitors and underscores its dedication to delivering superior products.</p>
-                    </div>
-                  </div>
+                  <img src="./assets/img/0/recycle/1.jpeg" alt="avatar" style="max-width: 100%; width: 700px; height: 550px" />
                 </div>
 
                 <div class="carousel-item">
-                  <img class="mb-4"
-                    src="./assets/img/0/flaticon/2.png" alt="avatar"
-                    style="width: 150px;" />
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                      <h5 class="mb-3">Advanced Formulation</h5>
-                      <p class="text-muted">The company employs cutting-edge manufacturing processes to formulate its oils. This emphasis on innovation ensures that its products are technologically advanced and effective in meeting the evolving needs of machinery.</p>
-                    </div>
-                  </div>
+                  <img src="./assets/img/0/recycle/2.jpeg" alt="avatar" style="max-width: 100%; width: 700px; height: 550px" />
                 </div>
 
                 <div class="carousel-item">
-                  <img class="mb-4"
-                    src="./assets/img/0/flaticon/3.png" alt="avatar"
-                    style="width: 150px;" />
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                      <h5 class="mb-3">Stringent Standards</h5>
-                      <p class="text-muted">Vidyaa Petroleum adheres to stringent international standards when producing its oils. This commitment to global benchmarks guarantees that its products are of the highest quality and meet industry-specific requirements.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="carousel-item">
-                  <img class="mb-4"
-                    src="./assets/img/0/flaticon/4.png" alt="avatar"
-                    style="width: 150px;" />
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                      <h5 class="mb-3">Enhanced Machinery Performance</h5>
-                      <p class="text-muted">By focusing on quality and international standards, the company's oils contribute to the improved performance of machinery. They are designed to minimize wear and tear, reducing the likelihood of breakdowns and downtime.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="carousel-item">
-                  <img class="mb-4"
-                    src="./assets/img/0/flaticon/5.png" alt="avatar"
-                    style="width: 150px;" />
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                      <h5 class="mb-3">Longevity of Machinery</h5>
-                      <p class="text-muted">The use of high-quality oils means that machinery is likely to have a longer operational life. This not only saves businesses on replacement costs but also enhances the overall efficiency and productivity of their operations.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="carousel-item">
-                  <img class="mb-4"
-                    src="./assets/img/0/flaticon/6.png" alt="avatar"
-                    style="width: 150px;" />
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                      <h5 class="mb-3">Reliable and Consistent Results</h5>
-                      <p class="text-muted">Clients can rely on Vidyaa Petroleum to consistently provide oils that meet or exceed international standards. This reliability translates into peace of mind for businesses, knowing their machinery is well-maintained with the best lubrication solutions available.</p>
-                    </div>
-                  </div>
+                  <img src="./assets/img/0/recycle/3.jpeg" alt="avatar" style="max-width: 100%; width: 700px; height: 550px" />
                 </div>
 
               </div>
@@ -293,24 +503,6 @@
                   data-mdb-slide-to="2"
                   aria-label="Slide 3"
                 ></button>
-                <button
-                  type="button"
-                  data-mdb-target="#carouselExampleControls"
-                  data-mdb-slide-to="3"
-                  aria-label="Slide 4"
-                ></button>
-                <button
-                  type="button"
-                  data-mdb-target="#carouselExampleControls"
-                  data-mdb-slide-to="4"
-                  aria-label="Slide 5"
-                ></button>
-                <button
-                  type="button"
-                  data-mdb-target="#carouselExampleControls"
-                  data-mdb-slide-to="5"
-                  aria-label="Slide 6"
-                ></button>
               </div>
             </div>
             <!-- Carousel wrapper -->
@@ -330,129 +522,444 @@
         </div>
 
         <ul class="nav nav-tabs row d-flex">
-          <li class="nav-item col-3">
+          <li class="nav-item col-6">
             <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
               <img style="height: 60px; width: 60px" class="me-3" src="./assets/img/0/flaticon/engine.png" alt="engine"/>
-              <h4 class="d-none d-lg-block">ENGINE OILS</h4>
+              <h4 class="d-none d-lg-block">AUTOMOTIVE OILS</h4>
             </a>
           </li>
-          <li class="nav-item col-3">
+          <li class="nav-item col-6">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-              <img style="height: 60px; width: 60px" class="me-3" src="./assets/img/0/flaticon/hydraulic.png" alt="hydraulic"/>
-              <h4 class="d-none d-lg-block">HYDRAULIC OILS</h4>
-            </a>
-          </li>
-          <li class="nav-item col-3">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-              <img style="height: 60px; width: 60px" class="me-3" src="./assets/img/0/flaticon/settings-gears.png" alt="gear"/>
-              <h4 class="d-none d-lg-block">GEAR OILS</h4>
-            </a>
-          </li>
-          <li class="nav-item col-3">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-              <img style="height: 60px; width: 60px" class="me-3" src="./assets/img/0/flaticon/compressor.png" alt="compressor"/>
-              <h4 class="d-none d-lg-block">COMPRESSOR OILS</h4>
+              <img style="height: 60px; width: 60px" class="me-3" src="./assets/img/0/flaticon//settings-gears.png" alt="hydraulic"/>
+              <h4 class="d-none d-lg-block">INDUSTRIAL OILS</h4>
             </a>
           </li>
         </ul>
 
         <div class="tab-content">
           <div class="tab-pane active show" id="tab-1">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
-                <h3>ENGINE OILS</h3>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
+            <section id="industries" class="team">
+              <div class="container">
+      
+              <div class="section-title">
+                <h2>AUTOMOTIVE OILS</h2>
               </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-                <img src="assets/img/0/products/1.jpeg" alt="1" class="img-fluid" style="height: 500px; width: auto; max-height: 100%">
+      
+                <div class="row">
+      
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member" style="padding-bottom: 60px">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/new/7.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL SUPER MG 20W/40</h4>
+                        <br>
+                        <h6>This product is superior quality multi grade oil for diesel & petrol engine of heavy duty commercial vehicle.</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member" style="padding-bottom: 20px">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/new/1.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL POWER 15W/40</h4>
+                        <br>
+                        <h6>This product is premium quality multi grade oil for heavy duty commercial engines provide of most performance in most sever applications of most modern diesel & certain gasoline engines.</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/25.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL SUPER XHD 30/40/50</h4>
+                        <br>
+                        <h6>This product is superior quality mono-grade engine oil for both
+                         diesel as well as petrol engines of heavy duty commercial
+                         vehicle protect engine parts & reduce sludge formation.</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member" style="padding-bottom: 35px">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/new/3.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL MOTOR OIL CF 5W/30</h4>
+                        <br>
+                        <h6>This product recommended for Cars, Buses, Trucks & all types
+                          of diesel engine. This oil provides easy to start at low temperature.</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/new/2.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL GEAR OIL EP 90/140</h4>
+                        <br>
+                        <h6>This product is superior quality gear oil containing extreme pressure additives.</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member" style="padding-bottom: 20px">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/new/4.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL 4T PLUS OIL 20W/40</h4>
+                        <br>
+                        <h6>This product is a 4 stroke engine oil essentially meets for two wheelers.</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="member" style="padding-bottom: 20px">
+                      <div class="member-img">
+                        <img src="assets//img/0/products/new/9.jpeg" class="img-fluid rounded" style="opacity:1;transform: translateX(0px);height: auto; width:100%;max-width: 350px">
+                      </div>
+                      <div class="member-info py-3">
+                        <h4>SACHNOL TQ ATF</h4>
+                        <br>
+                        <h6>This product is superior quality automotive transmission fluid.</h6>
+                      </div>
+                    </div>
+                  </div>
+      
+                </div>
+      
               </div>
-            </div>
+            </section>
+
           </div>
           <div class="tab-pane" id="tab-2">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>HYDRAULIC OILS</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="ri-check-double-line"></i> Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</li>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
+            <section style="margin-top: 2rem;" id="services">
+              <div class="section-title">
+                <h2>INDUSTRIAL OILS</h2>
               </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/0/products/14.jpeg" alt="" class="img-fluid" style="height: 500px; width: auto; max-height: 100%">
+              <div class="container">
+    
+                <div class="row">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-5">
+                    <h2 class="text-center">Industrial Lubricating Oils</h2>
+                    <div class="accordion" id="accordionExample">
+                    
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <i class="bi bi-film me-3"></i>Hydraulic & Circulating Oils (Anti Wear Type)
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Hydro-Power AW- 22, 32, 37, 46, 57, 68, 100, 150, 220, 320, 460
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="bi bi-globe me-3"></i>Hydraulic & Circulating Oils (HLP Type)
+                          </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Hydro-Power HLP - 22, 32, 37, 46,
+                            57, 68, 100, 150, 220, 320, 460
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="bi bi-bar-chart-line me-3"></i>General Purpose Machinery Oils
+                          </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Machine Oil - 22, 32, 37, 46, 57, 68,
+                            100, 150, 220, 320, 460
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="bi bi-camera-reels me-3"></i>Compressor Oils (Generator Sets & Air Compressors)
+                          </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Delgen 10, 20, 30, 40, 50
+                            <br>Sachnol Delgen 10HD, 20HD, 30HD, 40HD, 50HD
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <i class="bi bi-badge-ad me-3"></i>Steam Cylinder Oils
+                          </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Cylinder Oil - 460, 680, 1000
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <i class="bi bi-camera me-3"></i>Sugar Mill Bearing Lubricants
+                          </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Sugar Lube - 2, 3, 4, 6
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <i class="bi bi-people me-3"></i>Open Gear Compounds
+                          </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Compound - 1000, 2000, 5000
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingEight">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            <i class="bi bi-people me-3"></i>Refrigeration Compressor Oils
+                          </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Freez - 68, 100
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingNine">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                            <i class="bi bi-people me-3"></i>Ginning Oils
+                          </button>
+                        </h2>
+                        <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Ginning Oil - Light, Heavy
+                            <br>Sachnol Ginning Oil - High Grade
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTen">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                            <i class="bi bi-people me-3"></i>Quenching & Tempering Oils
+                          </button>
+                        </h2>
+                        <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Quench - 39, 40
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading11">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                            <i class="bi bi-people me-3"></i>Heat Transfer Oils (Thermic Fluid)
+                          </button>
+                        </h2>
+                        <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Heat Transfer - 500, 600, 1000
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading12">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                            <i class="bi bi-people me-3"></i>Vaccum Oils
+                          </button>
+                        </h2>
+                        <div id="collapse12" class="accordion-collapse collapse" aria-labelledby="heading12" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Vaccum Oil
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading13">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                            <i class="bi bi-people me-3"></i>Rubber Process Oils
+                          </button>
+                        </h2>
+                        <div id="collapse13" class="accordion-collapse collapse" aria-labelledby="heading13" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Rupro - 230P, 235P
+                            <br>Sachnol Rupro - 530N, 531N
+                            <br>Sachnol Rupro - 702A, 705A, 730A
+                            <br>Sachnol Rupro - EM-233
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading14">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse14" aria-expanded="false" aria-controls="collapse14">
+                            <i class="bi bi-people me-3"></i>Textile Specialities                           
+                          </button>
+                        </h2>
+                        <div id="collapse14" class="accordion-collapse collapse" aria-labelledby="heading14" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol - Spindle Oil 5, 12, 22
+                            <br>Sachnol - Conning Oil
+                            <br>Sachnol - Knitting Machine Oil
+                            <br>Sachnol - Stiching Oil                            
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading15">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse15" aria-expanded="false" aria-controls="collapse15">
+                            <i class="bi bi-people me-3"></i>Petroleum Jellies                        
+                          </button>
+                        </h2>
+                        <div id="collapse15" class="accordion-collapse collapse" aria-labelledby="heading15" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol - White Petroleum Jelly
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading16">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse16" aria-expanded="false" aria-controls="collapse16">
+                            <i class="bi bi-people me-3"></i>White Oils                      
+                          </button>
+                        </h2>
+                        <div id="collapse16" class="accordion-collapse collapse" aria-labelledby="heading16" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol - White Oils (L, M, H)
+                          </div>
+                        </div>
+                      </div>
+
+
+
+        
+                    </div>
+                  </div>
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-4">
+                    <h2 class="text-center">Metal Working Oils</h2>
+                    <div class="accordion mt-sm-5" id="accordionExample">
+                
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading1">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                            <i class="bi bi-film me-3"></i>Straight Cutting Oils                       
+                          </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Non-Corrosive Type :
+                            <br>Sachnol ST-Cut 12, 13, 14, 15
+                            <br>Active Type : :
+                            <br>Sachnol ST-Cut 33, 34, 36, 45
+                            <br>Honing & Grinding Oils :
+                            <br>Sachnol Cut - 130SF,
+                            <br>Sachnol Tool Grind Super
+                            <br>Special Broaching Oils:
+                            <br>Sachnol Broaching Spl. 1, Spl. 2
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading2">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            <i class="bi bi-globe me-3"></i>Soluble Cutting Oils
+                          </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Cut - 100, Ep-66, 60T
+                            <br>Synthetic Type : :
+                            <br>Sachnol Cut - 1000, 1070, 1080
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading3">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            <i class="bi bi-bar-chart-line me-3"></i>Metal Rolling Oils
+                          </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Metrol : 23, 35, 45, 55
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading4">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            <i class="bi bi-camera-reels me-3"></i>Rust Preventive Oils                        
+                          </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Sachnol Anti-Rust : DW-42, DW-44
+                            <br>Sachnol Anti-Rust : OB-52, OB-53
+                            <br>Sachnol Anti-Rust : HD-61CY, HD-62CY
+                            <br>Sachnol Rust Preventive Spl. : 50, 150
+                          </div>
+                        </div>
+                      </div>
+        
+                    </div>
+                  </div>
+                  <div class="col-lg-1"></div>
+                </div>
+    
               </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="tab-3">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>GEAR OILS</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <ul>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="ri-check-double-line"></i> Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</li>
-                </ul>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/0/products/7.jpeg" alt="" class="img-fluid" style="height: 500px; width: auto; max-height: 100%">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="tab-4">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>COMPRESSOR OILS</h3>
-                <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
-                <ul>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/0/products/3.jpeg" alt="" class="img-fluid" style="height: 500px; width: auto; max-height: 100%">
-              </div>
-            </div>
+            </section>
           </div>
         </div>
 
@@ -909,7 +1416,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <div class="member"  data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
                 <div class="social">
