@@ -371,7 +371,7 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/0/utility/hero.jpg") top fixed no-repeat;
+  background: url("../img/0/utility/hero.png") top fixed no-repeat;
   background-size: cover;
   position: relative;
   padding-top: 82px;
